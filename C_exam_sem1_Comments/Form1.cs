@@ -118,7 +118,33 @@ namespace C_exam_sem1_Comments
 
         private void button5_Click(object sender, EventArgs e)
         {
-
+            if(motorbikes.premium == false)
+            {
+                foreach(Motorbike motorbike in motorbikes.motorbikes)
+                {
+                    double price = motorbike.price * 0.75;
+                    motorbike.price = (double)misc.adjust(price);
+                }
+                motorbikes.premium = true;
+                try
+                {
+                    int pos = listBox1.SelectedIndex;
+                    Motorbike mb = motorbikes.motorbikes[pos];
+                    textBox1.Text = "";
+                    textBox1.Text += "Name: " + mb.name + Environment.NewLine;
+                    textBox1.Text += "Manufacturer: " + mb.manufacturer + Environment.NewLine;
+                    textBox1.Text += "Comment: " + mb.description + Environment.NewLine;
+                    textBox1.Text += "Price: " + mb.price.ToString() + "$" + Environment.NewLine;
+                    textBox1.Text += "Price: " + mb.stock.ToString() + Environment.NewLine;
+                    button5.Enabled = false;
+                    button5.Text = "You are a premium client";
+                }
+                catch (Exception nfe){
+                    button5.Enabled = false;
+                    button5.Text = "You are a premium client";
+                }
+                
+            }
         }
     }
 }

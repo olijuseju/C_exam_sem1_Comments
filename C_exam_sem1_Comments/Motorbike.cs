@@ -19,7 +19,9 @@ namespace C_exam_sem1_Comments
 
     public class Motorbikes
     {
+        public bool premium { get; set; }
         public List<Motorbike> motorbikes { get; set; }
+
     }
 
     
