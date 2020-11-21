@@ -55,7 +55,6 @@ namespace C_exam_sem1_Comments
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //hola que tal
             string input = textBox2.Text;
             string[] result = input.Split("\n\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             Motorbike motorbike = new Motorbike();
