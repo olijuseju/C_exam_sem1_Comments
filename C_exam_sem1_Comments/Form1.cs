@@ -146,5 +146,30 @@ namespace C_exam_sem1_Comments
                 
             }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                motorbikes.motorbikes.RemoveAt(listBox1.SelectedIndex);
+                for (int i = 0; i < motorbikes.motorbikes.Count; i++)
+                {
+                    motorbikes.motorbikes[i].id = i;
+                }
+                string jsonData = JsonConvert.SerializeObject(motorbikes);
+                File.WriteAllText("data/Motorbikes.json", jsonData);
+                textBox1.Text = "";
+                listBox1.Items.Clear();
+                foreach (Motorbike bike in motorbikes.motorbikes)
+                {
+                    listBox1.Items.Add(bike.name);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+        }
     }
 }
