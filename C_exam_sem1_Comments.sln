@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C_exam_sem1_Comments", "C_exam_sem1_Comments\C_exam_sem1_Comments.csproj", "{90D4F778-BF1D-47E2-B664-6FEDF53CA7CE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{90D4F778-BF1D-47E2-B664-6FEDF53CA7CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90D4F778-BF1D-47E2-B664-6FEDF53CA7CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90D4F778-BF1D-47E2-B664-6FEDF53CA7CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90D4F778-BF1D-47E2-B664-6FEDF53CA7CE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2CA6985D-6C29-4FCB-86D0-87F85508A91D}
+	EndGlobalSection
+EndGlobal
