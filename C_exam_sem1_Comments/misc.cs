@@ -16,6 +16,7 @@ namespace C_exam_sem1_Comments
             //Separamos la entrada por palabras
             string[] words = Regex.Split(input, @"[ ,;]+");
             string characters;
+            string result = "";
             string[] greatwords = new string[100];
             //Recorremos el array con las palabras
             for (int i = 0; i < words.Length; i++)
@@ -27,15 +28,14 @@ namespace C_exam_sem1_Comments
                     characters += char.ToLower(words[i][o]);
                 }
                 //guardamos las buenas en este array
-                greatwords[i] = characters;
+                result += characters + " ";
             }
             //Juntamos las palabras del array en un nuevo string separando por espacios
-            string result = "";
-            foreach (string word in greatwords)
+            /*foreach (string word in greatwords)
             {
                 result += word;
                 result += " ";
-            }
+            }*/
 
             return result;
         }
