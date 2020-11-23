@@ -28,6 +28,11 @@ namespace C_exam_sem1_Comments
                     listBox1.Items.Add(bike.name);
                 }
             }
+            if (motorbikes.premium == true)
+            {
+                button5.Enabled = false;
+                button5.Text = "You are a premium client";
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -55,41 +60,50 @@ namespace C_exam_sem1_Comments
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string input = textBox2.Text;
-            string[] result = input.Split("\n\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            Motorbike motorbike = new Motorbike();
-            motorbike.id = this.motorbikes.motorbikes.Count;
-            motorbike.name = (string)misc.normalize(result[0]);
-            motorbike.manufacturer = (string)misc.normalize(result[1]);
-            motorbike.description = result[2];
-            try
+            int lines = textBox1.Lines.Length;
+            if(lines == 5)
             {
-                double price = Double.Parse(result[3]);
-                motorbike.price = (double)misc.adjust(price);
-            }
-            catch (Exception nfe)
-            {
-                MessageBox.Show(nfe.Message);
-                textBox2.Text = "";
-                return;
-            }
+                string input = textBox2.Text;
+                string[] result = input.Split("\n\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                Motorbike motorbike = new Motorbike();
+                motorbike.id = this.motorbikes.motorbikes.Count;
+                motorbike.name = (string)misc.normalize(result[0]);
+                motorbike.manufacturer = (string)misc.normalize(result[1]);
+                motorbike.description = result[2];
+                try
+                {
+                    double price = Double.Parse(result[3]);
+                    motorbike.price = (double)misc.adjust(price);
+                }
+                catch (Exception nfe)
+                {
+                    MessageBox.Show(nfe.Message);
+                    textBox2.Text = "";
+                    return;
+                }
 
-            try
-            {
-                int quantity = int.Parse(result[4]);
-                motorbike.stock = (int)misc.noNegative(quantity);
-                motorbikes.motorbikes.Add(motorbike);
-                string jsonData = JsonConvert.SerializeObject(motorbikes);
-                File.WriteAllText("data/Motorbikes.json", jsonData);
-                listBox1.Items.Add(motorbike.name);
-                textBox2.Text = "";
+                try
+                {
+                    int quantity = int.Parse(result[4]);
+                    motorbike.stock = (int)misc.noNegative(quantity);
+                    motorbikes.motorbikes.Add(motorbike);
+                    string jsonData = JsonConvert.SerializeObject(motorbikes);
+                    File.WriteAllText("data/Motorbikes.json", jsonData);
+                    listBox1.Items.Add(motorbike.name);
+                    textBox2.Text = "";
+                }
+                catch (Exception nfe)
+                {
+                    MessageBox.Show(nfe.Message);
+                    textBox2.Text = "";
+                    return;
+                }
             }
-            catch (Exception nfe)
+            else
             {
-                MessageBox.Show(nfe.Message);
-                textBox2.Text = "";
-                return;
+                MessageBox.Show("Please read the HELP message");
             }
+            
             
         }
 
@@ -113,7 +127,7 @@ namespace C_exam_sem1_Comments
             textBox1.Text += "Manufacturer: " + mb.manufacturer + Environment.NewLine;
             textBox1.Text += "Comment: " + mb.description + Environment.NewLine;
             textBox1.Text += "Price: " + mb.price.ToString() + "$" + Environment.NewLine;
-            textBox1.Text += "Price: " + mb.stock.ToString() + Environment.NewLine;
+            textBox1.Text += "Stock: " + mb.stock.ToString() + Environment.NewLine;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -135,9 +149,12 @@ namespace C_exam_sem1_Comments
                     textBox1.Text += "Manufacturer: " + mb.manufacturer + Environment.NewLine;
                     textBox1.Text += "Comment: " + mb.description + Environment.NewLine;
                     textBox1.Text += "Price: " + mb.price.ToString() + "$" + Environment.NewLine;
-                    textBox1.Text += "Price: " + mb.stock.ToString() + Environment.NewLine;
+                    textBox1.Text += "Stock: " + mb.stock.ToString() + Environment.NewLine;
                     button5.Enabled = false;
                     button5.Text = "You are a premium client";
+                    string jsonData = JsonConvert.SerializeObject(motorbikes);
+                    File.WriteAllText("data/Motorbikes.json", jsonData);
+
                 }
                 catch (Exception nfe){
                     button5.Enabled = false;
