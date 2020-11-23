@@ -44,7 +44,7 @@ namespace C_exam_sem1_Comments
             {
                 Form1 secondaryWindow = new Form1();
                 secondaryWindow.Show();
-                this.Hide();
+                this.Close();
 
             }
         }

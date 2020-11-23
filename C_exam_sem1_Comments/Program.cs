@@ -16,7 +16,23 @@ namespace C_exam_sem1_Comments
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PasswordForm());
+            PasswordForm passwordForm = new PasswordForm();
+            passwordForm.FormClosed += CloseProgram;
+            passwordForm.Show();
+            Application.Run();
+        }
+        private static void CloseProgram(object sender, FormClosedEventArgs e)
+        {
+            ((Form)sender).FormClosed -= CloseProgram;
+
+            if (Application.OpenForms.Count == 0)
+            {
+                Application.ExitThread();
+            }
+            else
+            {
+                Application.OpenForms[0].FormClosed += CloseProgram;
+            }
         }
     }
 }
