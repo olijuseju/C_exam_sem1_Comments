@@ -31,24 +31,59 @@ namespace C_exam_sem1_Comments
         {
             if (radioButton1.Checked.Equals(true))
             {
-                using (StreamWriter sw = new StreamWriter("data/data.txt", true, Encoding.GetEncoding("iso-8859-1")))
+                using (StreamWriter sw = new StreamWriter("data/data.txt", false, Encoding.GetEncoding("iso-8859-1")))
                 {
-                    ;
+                    sw.WriteLine("ID,name,manufacturer,description,price,stock");
+                    foreach (Motorbike m in motorbikes.motorbikes)
+                    {
+                        sw.WriteLine(m.id.ToString() + "," + m.name + "," + m.manufacturer + "," + m.description + "," + m.price.ToString() + "," + m.stock.ToString());
+                    }
                 }
-            }else if (radioButton2.Checked == true)
-            {
-                XmlDocument doc = new XmlDocument();
-                XmlNodeList nodes = doc.DocumentElement.SelectNodes("/geonames/geoname");
-                doc.LoadXml("<item><name>wrench</name></item>");
-
-                XmlElement newElem = doc.CreateElement("price");
-                newElem.InnerText = "hola";
-                doc.DocumentElement.AppendChild(newElem);
-
-                doc.Save("data/data.xml");
-
+                MessageBox.Show("File exported correctly to CSV");
             }
-            
+            else if (radioButton2.Checked == true)
+            {
+               
+                XmlDocument doc = new XmlDocument();
+                XmlDeclaration xmlDeclaration = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
+                XmlElement root = doc.DocumentElement;
+                doc.InsertBefore(xmlDeclaration, root);
+                XmlElement mainLabel = doc.CreateElement(string.Empty, "motorbikes", string.Empty);
+                doc.AppendChild(mainLabel);
+                foreach (Motorbike p in motorbikes.motorbikes)
+                {
+                    XmlElement motorbikeLabel = doc.CreateElement(string.Empty, "motorbike", string.Empty);
+                    mainLabel.AppendChild(motorbikeLabel);
+                    XmlElement idLabel = doc.CreateElement(string.Empty, "id", string.Empty);
+                    XmlText valueId = doc.CreateTextNode(p.id.ToString());
+                    motorbikeLabel.AppendChild(idLabel);
+                    idLabel.AppendChild(valueId);
+                    XmlElement nameLabel = doc.CreateElement(string.Empty, "name", string.Empty);
+                    XmlText valueName = doc.CreateTextNode(p.name);
+                    motorbikeLabel.AppendChild(nameLabel);
+                    nameLabel.AppendChild(valueName);
+                    XmlElement manufacturerLabel = doc.CreateElement(string.Empty, "manufacturer", string.Empty);
+                    XmlText valueManufacturer = doc.CreateTextNode(p.manufacturer);
+                    motorbikeLabel.AppendChild(manufacturerLabel);
+                    manufacturerLabel.AppendChild(valueManufacturer);
+                    XmlElement descLabel = doc.CreateElement(string.Empty, "description", string.Empty);
+                    XmlText valueDesc = doc.CreateTextNode(p.description);
+                    motorbikeLabel.AppendChild(descLabel);
+                    descLabel.AppendChild(valueDesc);
+                    XmlElement priceLabel = doc.CreateElement(string.Empty, "price", string.Empty);
+                    XmlText valuePrice = doc.CreateTextNode(p.price.ToString());
+                    motorbikeLabel.AppendChild(priceLabel);
+                    priceLabel.AppendChild(valuePrice);
+                    XmlElement stockLabel = doc.CreateElement(string.Empty, "quantity", string.Empty);
+                    XmlText valueStock = doc.CreateTextNode(p.stock.ToString());
+                    motorbikeLabel.AppendChild(stockLabel);
+                    stockLabel.AppendChild(valueStock);
+
+                }
+                doc.Save("data/data.xml");
+                MessageBox.Show("File exported correctly to XML");
+            }
+
         }
     }
 }

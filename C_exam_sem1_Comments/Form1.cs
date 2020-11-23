@@ -60,7 +60,7 @@ namespace C_exam_sem1_Comments
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int lines = textBox1.Lines.Length;
+            int lines = textBox2.Lines.Length;
             if(lines == 5)
             {
                 string input = textBox2.Text;
