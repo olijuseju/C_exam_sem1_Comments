@@ -38,8 +38,10 @@ namespace C_exam_sem1_Comments
                     {
                         sw.WriteLine(m.id.ToString() + "," + m.name + "," + m.manufacturer + "," + m.description + "," + m.price.ToString() + "," + m.stock.ToString());
                     }
+                    
                 }
                 MessageBox.Show("File exported correctly to CSV");
+                textBox1.Text = System.IO.File.ReadAllText("data/data.txt");
             }
             else if (radioButton2.Checked == true)
             {
@@ -82,6 +84,9 @@ namespace C_exam_sem1_Comments
                 }
                 doc.Save("data/data.xml");
                 MessageBox.Show("File exported correctly to XML");
+                textBox1.Text = "";
+                textBox1.Text = doc.OuterXml;
+               
             }
 
         }
