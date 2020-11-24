@@ -13,30 +13,25 @@ namespace C_exam_sem1_Comments
 
         public static object normalize(string input)
         {
-            //Separamos la entrada por palabras
             string[] words = Regex.Split(input, @"[ ,;]+");
             string characters;
             string result = "";
             string[] greatwords = new string[100];
-            //Recorremos el array con las palabras
             for (int i = 0; i < words.Length; i++)
             {
-                //La primera palabra mayúscula y el resto minúscula en cada palabra
-                characters = char.ToUpper(words[i][0]).ToString();
-                for (int o = 1; o < words[i].Length; o++)
-                {
-                    characters += char.ToLower(words[i][o]);
-                }
-                //guardamos las buenas en este array
-                result += characters + " ";
-            }
-            //Juntamos las palabras del array en un nuevo string separando por espacios
-            /*foreach (string word in greatwords)
-            {
-                result += word;
-                result += " ";
-            }*/
 
+                if(words[i].Length != 0)
+                {
+                    characters = char.ToUpper(words[i][0]).ToString();
+                    for (int o = 1; o < words[i].Length; o++)
+                    {
+                        characters += char.ToLower(words[i][o]);
+                    }
+                    result += characters + " ";
+                }
+                
+            }
+            
             return result;
         }
 

@@ -19,19 +19,25 @@ namespace C_exam_sem1_Comments
         public Form1()
         {
             InitializeComponent();
-            using (StreamReader sr = File.OpenText("data/Motorbikes.json"))
-            {
-                string json = sr.ReadToEnd();
-                motorbikes = JsonConvert.DeserializeObject<Motorbikes>(json);
-                foreach(Motorbike bike in motorbikes.motorbikes)
-                {
-                    listBox1.Items.Add(bike.name);
-                }
-            }
+            update();
             if (motorbikes.premium == true)
             {
                 button5.Enabled = false;
                 button5.Text = "You are a premium client";
+            }
+        }
+
+        public void update()
+        {
+            listBox1.Items.Clear();
+            using (StreamReader sr = File.OpenText("data/Motorbikes.json"))
+            {
+                string json = sr.ReadToEnd();
+                motorbikes = JsonConvert.DeserializeObject<Motorbikes>(json);
+                foreach (Motorbike bike in motorbikes.motorbikes)
+                {
+                    listBox1.Items.Add(bike.name);
+                }
             }
         }
 
@@ -120,14 +126,20 @@ namespace C_exam_sem1_Comments
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int pos = listBox1.SelectedIndex;
-            Motorbike mb = motorbikes.motorbikes[pos];
-            textBox1.Text = "";
-            textBox1.Text += "Name: " + mb.name + Environment.NewLine;
-            textBox1.Text += "Manufacturer: " + mb.manufacturer + Environment.NewLine;
-            textBox1.Text += "Comment: " + mb.description + Environment.NewLine;
-            textBox1.Text += "Price: " + mb.price.ToString() + "$" + Environment.NewLine;
-            textBox1.Text += "Stock: " + mb.stock.ToString() + Environment.NewLine;
+            try{
+                int pos = listBox1.SelectedIndex;
+                Motorbike mb = motorbikes.motorbikes[pos];
+                textBox1.Text = "";
+                textBox1.Text += "Name: " + mb.name + Environment.NewLine;
+                textBox1.Text += "Manufacturer: " + mb.manufacturer + Environment.NewLine;
+                textBox1.Text += "Comment: " + mb.description + Environment.NewLine;
+                textBox1.Text += "Price: " + mb.price.ToString() + "$" + Environment.NewLine;
+                textBox1.Text += "Stock: " + mb.stock.ToString() + Environment.NewLine;
+            }catch(Exception ex)
+            {
+
+            }
+            
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -185,6 +197,27 @@ namespace C_exam_sem1_Comments
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+            
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                modifyMotorbike modifyMotorbike = new modifyMotorbike();
+                modifyMotorbike.id = motorbikes.motorbikes[listBox1.SelectedIndex].id;
+                modifyMotorbike.textBox2.Text = motorbikes.motorbikes[listBox1.SelectedIndex].name;
+                modifyMotorbike.textBox4.Text = motorbikes.motorbikes[listBox1.SelectedIndex].manufacturer;
+                modifyMotorbike.textBox3.Text = motorbikes.motorbikes[listBox1.SelectedIndex].price.ToString();
+                modifyMotorbike.textBox6.Text = motorbikes.motorbikes[listBox1.SelectedIndex].stock.ToString();
+                modifyMotorbike.textBox5.Text = motorbikes.motorbikes[listBox1.SelectedIndex].description;
+                modifyMotorbike.Show();
+                this.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Please select an item");
             }
             
         }
