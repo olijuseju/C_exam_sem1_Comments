@@ -29,7 +29,7 @@ namespace C_exam_sem1_Comments
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if ( radioButton1.Checked.Equals("false") && radioButton2.Checked.Equals("false") ) {
+            if ( radioButton1.Checked.Equals(false) && radioButton2.Checked.Equals(false) ) {
                 MessageBox.Show("Select a valid export method");
             }else
             if (radioButton1.Checked.Equals(true))

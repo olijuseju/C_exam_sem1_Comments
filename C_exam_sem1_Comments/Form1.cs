@@ -66,46 +66,55 @@ namespace C_exam_sem1_Comments
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int lines = textBox2.Lines.Length;
-            if(lines == 5)
+            string input = textBox3.Text;
+            try
             {
-                string input = textBox2.Text;
-                string[] result = input.Split("\n\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 Motorbike motorbike = new Motorbike();
                 motorbike.id = this.motorbikes.motorbikes.Count;
-                motorbike.name = (string)misc.normalize(result[0]);
-                motorbike.manufacturer = (string)misc.normalize(result[1]);
-                motorbike.description = result[2];
+                motorbike.name = (string)misc.normalize(input);
+                motorbike.manufacturer = (string)misc.normalize(textBox4.Text);
+                motorbike.description = textBox7.Text;
                 try
                 {
-                    double price = Double.Parse(result[3]);
+                    double price = Double.Parse(textBox5.Text);
                     motorbike.price = (double)misc.adjust(price);
                 }
                 catch (Exception nfe)
                 {
-                    MessageBox.Show(nfe.Message);
-                    textBox2.Text = "";
+                    MessageBox.Show("The price shoul be a decimal number");
+                    textBox3.Text = "";
+                    textBox4.Text = "";
+                    textBox5.Text = "";
+                    textBox6.Text = "";
+                    textBox7.Text = "";
                     return;
                 }
-
                 try
                 {
-                    int quantity = int.Parse(result[4]);
+                    int quantity = int.Parse(textBox6.Text);
                     motorbike.stock = (int)misc.noNegative(quantity);
                     motorbikes.motorbikes.Add(motorbike);
                     string jsonData = JsonConvert.SerializeObject(motorbikes);
                     File.WriteAllText("data/Motorbikes.json", jsonData);
                     listBox1.Items.Add(motorbike.name);
-                    textBox2.Text = "";
+                    textBox3.Text = "";
+                    textBox4.Text = "";
+                    textBox5.Text = "";
+                    textBox6.Text = "";
+                    textBox7.Text = "";
                 }
                 catch (Exception nfe)
                 {
-                    MessageBox.Show(nfe.Message);
-                    textBox2.Text = "";
+                    MessageBox.Show("insert a valid quantity");
+                    textBox3.Text = "";
+                    textBox4.Text = "";
+                    textBox5.Text = "";
+                    textBox6.Text = "";
+                    textBox7.Text = "";
                     return;
                 }
-            }
-            else
+            }    
+            catch(Exception ex)
             {
                 MessageBox.Show("Please read the HELP message");
             }
