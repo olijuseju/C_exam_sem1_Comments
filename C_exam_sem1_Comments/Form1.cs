@@ -166,13 +166,14 @@ namespace C_exam_sem1_Comments
                     button5.Text = "You are a premium client";
                     string jsonData = JsonConvert.SerializeObject(motorbikes);
                     File.WriteAllText("data/Motorbikes.json", jsonData);
-                    MessageBox.Show("You have a discount of 25%");
+                    
                 }
                 catch (Exception nfe){
                     button5.Enabled = false;
                     button5.Text = "You are a premium client";
                 }
-                
+                MessageBox.Show("You have a discount of 25%");
+
             }
         }
 
@@ -197,7 +198,7 @@ namespace C_exam_sem1_Comments
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Please select an item");
             }
             
         }
