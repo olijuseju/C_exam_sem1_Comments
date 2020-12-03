@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 namespace C_exam_sem1_Comments
 {
     
-    public class Motorbike
+    public class Motorbike// Pojo Class
+        //This class is for a single object
     {
+
         public int id { get; set; }
         public string name { get; set; }
         public string manufacturer { get; set; }
@@ -18,9 +20,11 @@ namespace C_exam_sem1_Comments
     }
 
     public class Motorbikes
+    //Data from Json is stored in the atributes
+
     {
-        public bool premium { get; set; }
-        public List<Motorbike> motorbikes { get; set; }
+        public bool premium { get; set; }//A variable to check and create premium users
+        public List<Motorbike> motorbikes { get; set; }//This is the array with the Motorbike objects
 
     }
 
